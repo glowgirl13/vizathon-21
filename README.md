@@ -66,6 +66,108 @@ barplot (values, main ="Ventilation and Intubation in the COVID-19 Pandemic",
 
 **That's all for the code, however I also made further visualizations through the platform Tableau!** These graphs are also bar charts, however what distinguishes them from the other bar charts is that they also show all of the other factors (outside of screenings and ventilators/intubulation), thereby providing a more holistic point of view. These visuals can be found through this link: https://public.tableau.com/app/profile/ulain.umar/viz/IndicatorsofCOVID-19fromCDCDataonHospitals/Dashboard1?publish=yes
 
+**Further data visualizations were created on the basis of my home province Ontario!** This data was particularly interesting because it showed the disparity that exists based on geography. Firstly, I created bar charts through RStudio using the following code:
+
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("dplyr")
+library(dplyr)
+
+Data.set <-read.csv("region_hospital_icu_covid_data.csv")
+Data.set <- Data.set %>% select(oh_region, icu_current_covid, icu_current_covid_vented, hospitalizations)
+
+central <- Data.set %>% filter(oh_region == "CENTRAL")
+central1 <- sum(central['icu_current_covid'])
+central2 <- sum(central['icu_current_covid_vented'])
+central3 <- sum(central['hospitalizations'])
+
+values1 <- c(central1, central2, central3)
+counts1 <- table(values1)
+barplot (values1, main ="COVID-19 Patients in Different ICU Conditions in the Central Regions of Ontario",
+         xlab="ICU Condition",
+         ylab="Value",
+         col=c("#dea5a4","#ffb347","#aec64f"),
+         border="black",
+         names.arg=c("ICU Patients w/ COVID", "ICU Patients w/ COVID & Ventilators", "Hospitalizations"), cex.names=0.8)
+
+
+east <- Data.set %>% filter(oh_region == "EAST")
+east1 <- sum(east['icu_current_covid'])
+east2 <- sum(east['icu_current_covid_vented'])
+east3 <- sum(east['hospitalizations'])
+
+values2 <- c(east1, east2, east3)
+counts2 <- table(values2)
+barplot (values2, main ="COVID-19 Patients in Different ICU Conditions in the Eastern Regions of Ontario",
+         xlab="ICU Condition",
+         ylab="Value",
+         col=c("#dea5a4","#ffb347","#aec64f"),
+         border="black",
+         names.arg=c("ICU Patients w/ COVID", "ICU Patients w/ COVID & Ventilators", "Hospitalizations"), cex.names=0.8)
+
+north <- Data.set %>% filter(oh_region == "NORTH")
+north1 <- sum(north['icu_current_covid'])
+north2 <- sum(north['icu_current_covid_vented'])
+north3 <- sum(north['hospitalizations'])
+
+values3 <- c(north1, north2, north3)
+counts3 <- table(values3)
+barplot (values3, main ="COVID-19 Patients in Different ICU Conditions in the Northern Regions of Ontario",
+         xlab="ICU Condition",
+         ylab="Value",
+         col=c("#dea5a4","#ffb347","#aec64f"),
+         border="black",
+         names.arg=c("ICU Patients w/ COVID", "ICU Patients w/ COVID & Ventilators", "Hospitalizations"), cex.names=0.8)
+
+
+toronto <- Data.set %>% filter(oh_region == "TORONTO")
+toronto1 <- sum(toronto['icu_current_covid'])
+toronto2 <- sum(toronto['icu_current_covid_vented'])
+toronto3 <- sum(toronto['hospitalizations'])
+
+values4 <- c(toronto1, toronto2, toronto3)
+counts4 <- table(values4)
+barplot (values4, main ="COVID-19 Patients in Different ICU Conditions in Toronto,Ontario",
+         xlab="ICU Condition",
+         ylab="Value",
+         col=c("#dea5a4","#ffb347","#aec64f"),
+         border="black",
+         names.arg=c("ICU Patients w/ COVID", "ICU Patients w/ COVID & Ventilators", "Hospitalizations"), cex.names=0.8)
+
+
+west <- Data.set %>% filter(oh_region == "WEST")
+west1 <- sum(west['icu_current_covid'])
+west2 <- sum(west['icu_current_covid_vented'])
+west3 <- sum(west['hospitalizations'])
+
+values5 <- c(west1, west2, west3)
+counts5 <- table(values5)
+barplot (values5, main ="COVID-19 Patients in Different ICU Conditions in the Western Regions of Ontario",
+         xlab="ICU Condition",
+         ylab="Value",
+         col=c("#dea5a4","#ffb347","#aec64f"),
+         border="black",
+         names.arg=c("ICU Patients w/ COVID", "ICU Patients w/ COVID & Ventilators", "Hospitalizations"), cex.names=0.8)
+
+
+values <- c(central, east, north, toronto, west)
+counts <- table(values)
+barplot (values, main ="COVID-19 Patients in the ICU in Different Regions of Ontario",
+         xlab="Region",
+         ylab="# of COVID-19 Patients in the ICU",
+         col=c("#dea5a4","#ffb347","#aec64f", "#77dd77", "#ff6961"),
+         border="black",
+         names.arg=c("Central", "East", "North", "Toronto", "West"), cex.names=0.8)
+**That's all the code, here are the associated bar graphs:**
+![COVID-19 Patients in the ICU in Different Regions of Ontario](https://user-images.githubusercontent.com/88276569/127775882-5354ed57-a407-48ed-b86a-73c06542a236.png)
+![COVID-19 patients in DIfferent ICU Conditions in the Central Regions of Ontario](https://user-images.githubusercontent.com/88276569/127775894-fa068392-3743-49f4-b664-d781386a5441.png)
+![COVID-19 patients in DIfferent ICU Conditions in the Eastern Regions of Ontario](https://user-images.githubusercontent.com/88276569/127775896-ada495d2-040a-433c-8d98-e9fcc571213b.png)
+![COVID-19 patients in DIfferent ICU Conditions in the Northern Regions of Ontario](https://user-images.githubusercontent.com/88276569/127775897-0e072af9-5d4a-45da-8d24-dc148aa4e508.png)
+![COVID-19 patients in DIfferent ICU Conditions in the Western Regions of Ontario](https://user-images.githubusercontent.com/88276569/127775898-dd6d7031-de39-4c46-a8f0-aa4698881998.png)
+![COVID-19 patients in DIfferent ICU Conditions in Toronto, Ontario](https://user-images.githubusercontent.com/88276569/127775899-8ec1f840-5059-4b25-bbfd-b6243a357ef2.png)
+
+**I also created a side-by-side comparison on Tableau, which can be found here: https://public.tableau.com/app/profile/ulain.umar/viz/ICUConditionsinDifferentRegionsofOntarioASide-by-SideComparison/Dashboard1?publish=yes**
+
 
 
 
